@@ -1,0 +1,24 @@
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);   //LED pin as output
+  Serial.begin(9600);  // set baud rate
+  randomSeed(analogRead(A0)); //Random Number Generator
+}
+
+void loop() {
+  while (!Serial.available()) {} // wait for data to arrive
+
+  // read string data from Serial, we know Python 
+  // script is sending just an integer.
+  int blink = Serial.readString().toInt();
+
+  for (int i = 0; i < blink; i++){
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
+  }
+  
+  int slp = random(1,5); //Creates random time
+  Serial.println(slp); //Sends the time for Python
+
+}
