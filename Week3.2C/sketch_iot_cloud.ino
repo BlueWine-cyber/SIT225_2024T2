@@ -32,20 +32,22 @@ int getUltrasonicDistance(){
 bool getSensor(){
   // Create variable for sensor
   sensor = false;
-  
+
+  // If distance is too close, set sensor to 1
   if(distance < 10){
     sensor = true;
     Serial.print("Sensor: ");
     Serial.println(sensor);
   }
 
+  // If distance is not close, set sensor to 0
   else if(distance >= 10) {
     sensor = false;
     Serial.print("Sensor: ");
     Serial.println(sensor);
   }
 
-  // Return the distance read from the sensor:
+  // Return status of the sensor:
   return sensor;
 }
 
