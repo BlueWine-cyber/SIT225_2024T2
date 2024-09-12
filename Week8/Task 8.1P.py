@@ -64,10 +64,9 @@ def buffer_data(timestamp, x, y, z):
     z_buffer.append(z)
     
     timestamps.append(timestamp)
-
     store_combined_data(timestamp, x, y, z)
 
-app = Dash(__name__)
+app = Dash()
 
 app.layout = html.Div(children=[
     html.H1(children="Accelerometer Data Visualization"),
