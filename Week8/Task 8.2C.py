@@ -20,13 +20,13 @@ y_buffer = deque(maxlen=BUFFER_SIZE)
 z_buffer = deque(maxlen=BUFFER_SIZE)
 
 def average(data, window_size=5):
-    """Calculate the average of the last `window_size` values in `data`"""
+    # Calculate the average of the last 'window_size' values in 'data'
     if len(data) < window_size:
         return sum(data) / len(data) if data else 0
     return sum(list(data)[-window_size:]) / window_size
 
 def latest_data():
-    """Return the latest averaged values from the data buffers"""
+    # Return the latest averaged values from the data buffers
     new_x = average(x_buffer)
     new_y = average(y_buffer)
     new_z = average(z_buffer)
@@ -37,7 +37,7 @@ def latest_data():
     return new_x, new_y, new_z
 
 async def connect_to_arduino():
-    """Connect to the Arduino IoT Cloud device and register callbacks"""
+    # Connect to the Arduino IoT Cloud device and register callbacks
     try:
         client = ArduinoCloudClient(
             device_id=DEVICE_ID,
@@ -67,7 +67,7 @@ async def connect_to_arduino():
         print(f"Error setting up Arduino IoT Cloud: {error}")
 
 def live_update_plotly_dash(data_source, interval=100):
-    """Create a Plotly Dash app that updates with the latest data"""
+    # Create a Plotly Dash app that updates with the latest data
     app = Dash(__name__)
 
     x_buffer_local = deque(maxlen=BUFFER_SIZE)
@@ -111,7 +111,7 @@ def live_update_plotly_dash(data_source, interval=100):
         print(f"Error starting Plotly Dash server: {e}")
 
 def setup_arduino_cloud():
-    """Start the Arduino IoT Cloud connection in a separate thread"""
+    # Start the Arduino IoT Cloud connection in a separate thread
     arduino_thread = threading.Thread(target=connect_to_arduino)
     arduino_thread.start()
 
